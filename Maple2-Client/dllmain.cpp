@@ -37,13 +37,13 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved) {
 
       // Load config file to global variables.
 #ifndef _WIN64 // Maple2.ini is the root path. If this client is x64, the client is in the x64 folder, so read the file in the upper path.
-      if (!config::Load("maple2.ini")) {
+      if (!config::Load("server.ini")) {
         ShowWindow(GetConsoleWindow(), SW_RESTORE);
         MessageBoxA(NULL, "Failed to load config.", "Error", MB_ICONERROR | MB_OK);
         return FALSE;
       }
 #else
-      if (!config::Load("../maple2.ini")) {
+      if (!config::Load("../server.ini")) {
         ShowWindow(GetConsoleWindow(), SW_RESTORE);
         MessageBoxA(NULL, "Failed to load config.", "Error", MB_ICONERROR | MB_OK);
         return FALSE;
