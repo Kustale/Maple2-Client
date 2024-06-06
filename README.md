@@ -1,6 +1,6 @@
 # Maple2 Client
 
-## Example Config File (maple2.ini)
+## Example Config File (server.ini)
 ```ini
 [default]
 name=Maple2
