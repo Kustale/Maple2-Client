@@ -124,6 +124,20 @@ namespace hook {
       return true;
     }
 
+    bool PatchInputText(sigscanner::SigScanner& memory) { //Add by https://github.com/shuabritze/Maple2-Client/
+#ifdef _WIN64
+      DWORD_PTR dwLocaleLanguageConstant = 0x140216a71;
+      memory.WriteBytes(dwLocaleLanguageConstant, { 0xBE, 0x7B, 0x0, 0x0, 0x0 }); // Set the value to 0x7B
+#else
+      DWORD_PTR dwLocaleLanguageConstant = 0x00457697;
+      memory.WriteBytes(dwLocaleLanguageConstant, { 0xC7, 0x45, 0xEC, 0x7B, 0x0, 0x0, 0x0 }); // Set the value to 0x7B
+#endif
+
+      std::cout << "PATCH_INPUT_TEXT at " << (void*)dwLocaleLanguageConstant << std::endl;
+      return true;
+    }
+
+
     void* (__fastcall Initializing)(void* self, void* edx, DWORD* serviceManager, void* a1);
     static auto _Initializing = reinterpret_cast<decltype(&Initializing)>(ServiceManagerHook);
 
@@ -145,12 +159,12 @@ namespace hook {
         }
 
         return result;
-      };
+        };
 
       return hook::SetHook(TRUE, reinterpret_cast<void**>(&_Initializing), Hook);
     }
 
-    bool (__fastcall IsConfigFile)(void* self, void* edx, char* path);
+    bool(__fastcall IsConfigFile)(void* self, void* edx, char* path);
     static auto _IsConfigFile = reinterpret_cast<decltype(&IsConfigFile)>(0x004B8BC0);
 
     bool HookIsConfigFile() {
@@ -164,7 +178,7 @@ namespace hook {
         }
 
         return result;
-      };
+        };
 
       return hook::SetHook(TRUE, reinterpret_cast<void**>(&_IsConfigFile), Hook);
     }
@@ -258,6 +272,10 @@ namespace hook {
       bResult &= PatchUgdUrl(memory, config::UgdUrl);
     }
 
+    if (config::PatchInputText) { //Add by https://github.com/shuabritze/Maple2-Client/
+      bResult &= PatchInputText(memory);
+    }
+
 #ifndef _WIN64
     if (config::EnableVisualizer) {
       if (!chat::Hook()) {
@@ -347,7 +365,7 @@ namespace hook {
       }
 
       return EXCEPTION_CONTINUE_SEARCH;
-    };
+      };
 
     return AddVectoredExceptionHandler(1, exHandler);
   }

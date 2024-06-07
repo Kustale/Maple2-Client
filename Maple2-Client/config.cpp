@@ -57,6 +57,7 @@ namespace config {
   bool BypassBanWord;
   bool EnableMultiClient;
   bool EnableVisualizer;
+  bool PatchInputText; //Add by https://github.com/shuabritze/Maple2-Client/
   std::string UgdUrl;
 
   bool HookOutPacket;
@@ -84,7 +85,7 @@ namespace config {
       ini.generate(std::cout);
     }
 
-    auto &cfg = ini.sections["default"];
+    auto& cfg = ini.sections["default"];
     WindowName = AtOrDefault<std::string>(cfg, "name", "MapleStory2");
     Locale = AtOrDefault<std::string>(cfg, "locale", "EN");
     HostName = AtOrDefault<std::string>(cfg, "host", "localhost");
@@ -95,6 +96,7 @@ namespace config {
     EnableMultiClient = AtOrDefault<bool>(cfg, "multiclient");
     EnableVisualizer = AtOrDefault<bool>(cfg, "visualizer");
     UgdUrl = AtOrDefault<std::string>(cfg, "ugd_url", "");
+    PatchInputText = AtOrDefault<bool>(cfg, "patch_input_text"); //Add by https://github.com/shuabritze/Maple2-Client/
 
     HookOutPacket = AtOrDefault<bool>(cfg, "hook_outpacket", false);
     HookInPacket = AtOrDefault<bool>(cfg, "hook_inpacket", false);
