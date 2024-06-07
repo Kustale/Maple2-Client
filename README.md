@@ -8,4 +8,5 @@ host=localhost
 port=20001
 banword=true
 multiclient=true
+patch_input_text=true
 ```
