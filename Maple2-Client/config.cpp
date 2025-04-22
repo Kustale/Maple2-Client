@@ -63,6 +63,9 @@ namespace config {
   bool HookOutPacket;
   bool HookInPacket;
 
+  bool EnableCefHook;
+  bool EnableConsole;
+
   DWORD* ServiceManager;
   DWORD* MS2VisualTracker;
 
@@ -100,6 +103,9 @@ namespace config {
 
     HookOutPacket = AtOrDefault<bool>(cfg, "hook_outpacket", false);
     HookInPacket = AtOrDefault<bool>(cfg, "hook_inpacket", false);
+
+    EnableCefHook = AtOrDefault<bool>(cfg, "hook_cef", true); //Updated by kOchirasu
+    EnableConsole = AtOrDefault<bool>(cfg, "enable_console", true); //Updated by kOchirasu
 
     return true;
   }

@@ -67,8 +67,10 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved) {
       }
 #endif
 
-      SetConsoleTitleA(config::WindowName.c_str());
-      ShowWindow(GetConsoleWindow(), SW_RESTORE);
+      if (config::EnableConsole) { //Updated by kOchirasu
+        SetConsoleTitleA(config::WindowName.c_str());
+        ShowWindow(GetConsoleWindow(), SW_RESTORE);
+      }
 
       if (!winsock::Hook()) {
         MessageBoxA(NULL, "Failed to hook winsock.", "Error", MB_ICONERROR | MB_OK);
