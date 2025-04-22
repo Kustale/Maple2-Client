@@ -9,4 +9,6 @@ port=20001
 banword=true
 multiclient=true
 patch_input_text=true
+hook_cef=true
+enable_console=true
 ```
