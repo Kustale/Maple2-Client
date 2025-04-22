@@ -334,6 +334,10 @@ namespace hook {
       bResult &= PatchInputText(memory);
     }
 
+    if (config::EnableCefHook) { //Add by kOchirasu
+      bResult &= EnableCefHook(memory);
+    }
+
 #ifndef _WIN64
     if (config::EnableVisualizer) {
       if (!chat::Hook()) {

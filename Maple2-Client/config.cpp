@@ -63,8 +63,8 @@ namespace config {
   bool HookOutPacket;
   bool HookInPacket;
 
-  bool EnableCefHook;
-  bool EnableConsole;
+  bool EnableCefHook; //Add by kOchirasu
+  bool EnableConsole; //Add by kOchirasu
 
   DWORD* ServiceManager;
   DWORD* MS2VisualTracker;
